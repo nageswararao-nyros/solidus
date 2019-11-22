@@ -1,4 +1,4 @@
-class Users < ActiveRecord::Migration[6.0]
+class Users < ActiveRecord::Migration[5.2]
   def change
   	 add_column :spree_users, :provider, :string
   	  add_column :spree_users, :uid, :string

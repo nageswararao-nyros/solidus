@@ -1,0 +1,1 @@
+!function(e){"use strict";e.fn.select2.locales["en-US"]={},e.extend(e.fn.select2.defaults,e.fn.select2.locales["en-US"])}(jQuery);
