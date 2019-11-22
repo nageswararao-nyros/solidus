@@ -1,0 +1,18 @@
+<% stars = product.stars %>
+<% reviews_count = product.reviews_count %>
+<div class="ratings">
+  <p style="padding-bottom: 0px; margin-bottom: 0px;">
+    <%= I18n.t('spree.average_customer_rating') %>: 
+    <span class="ratings-stars"  style="padding-bottom: 0px; padding-top: 0px; margin-top: 0px; margin-bottom: 0px;">
+      <span title="<%= txt_stars(stars) %>">
+        <%= render 'spree/reviews/stars', stars: stars %>
+      </span>
+    </span>
+  </p>
+ 
+  <p class="ratings-basedupon" style="margin-top: 0px; padding-top: 0px;">(<%= I18n.t('spree.based_upon_review_count', count: reviews_count) %>)</p>
+  <div itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+    <meta itemprop="ratingValue" content="<%= stars %>" />
+    <meta itemprop="reviewCount" content="<%= reviews_count %>" />
+  </div>
+</div>

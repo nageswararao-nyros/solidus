@@ -1,0 +1,23 @@
+<% if !@product.taxons.blank? %>
+  <div id="taxon-crumbs" data-hook class="alpha columns five omega">
+    <h6 class="product-section-title"><%= t('spree.look_for_similar_items') %></h6>
+
+    <div data-hook="product_taxons">
+      <div id="similar_items_by_taxon" data-hook>
+        <h1>Related products</h1>
+        <% @product.taxons.each do |taxon| %>
+          <h5 class="subtaxon-title">
+            <%= link_to taxon.name, seo_url(taxon), class: 'breadcrumbs' %> 
+          </h5>
+          <div data-hook="homepage_products" style="width: 700px;">
+          <%= render partial: 'spree/shared/related_products', locals: { products: taxon_preview(taxon), taxon: taxon } %>
+          
+        <% end %>
+      </div>
+      </div> 
+
+
+    </div>
+
+  </div>
+<% end %>

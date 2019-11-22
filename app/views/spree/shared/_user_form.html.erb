@@ -1,0 +1,209 @@
+
+
+
+<div class="container">
+  <div class="form-horizontal no-border form u-dimension-2"  style ="margin-top:20px; width: 430px;"align="center" >
+      <%= form_for resource, :as => :spree_user, :url => spree.registration_path do |f| %>
+     <h3 align="center">Sign up</h3>
+   
+      <div class="form-group">
+        <div class="col-sm-12">
+          <%= f.label :email %>
+        
+          <%= f.email_field :email, autofocus: true,class: 'form-control'%>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-12">
+          <%= f.label :password %>
+         
+          <%= f.password_field :password, autocomplete: "current-password",class: 'form-control'%>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-12">
+          <%= f.label :password_confirmation %>
+          <span class="err"><%= resource.errors[:password_confirmation].join('. ') %></span><br />
+          <%= f.password_field :password_confirmation, autocomplete: "off",class: 'form-control'%>
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <div class="col-sm-12">
+            <%= f.submit "Create your account", class: 'submitBtn btn btn-block btn-primary btn', id: 'modal-submit' %>
+        </div>
+      </div>
+
+    <% end %>
+    <p> Have an account? <%= link_to "Sign in", new_spree_user_session_path%> </p>
+  </div>
+</div> 
+
+<style type="text/css">
+  .form-group{
+    width:356px;
+  }
+
+  .form{
+   
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+  .col-sm-12{
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+</style>
+
+<style type="text/css">
+    #top-nav-bar {
+    text-align: right;
+    margin-top: 0px;
+  }
+
+  .container .ten.columns {
+     width: 700px;
+  }
+  .form-group{
+    width:356px;
+  }
+
+  .form{
+  
+
+    padding-top: 30px;
+    padding-bottom: 50px;
+  }
+  .col-sm-12{
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  
+
+  #user_remember_me{  
+    margin-right:0px;
+  }
+  .forgot_pwd{
+    padding-left: 90px;
+  }
+
+  a:hover{
+      text-decoration-line: none;
+
+  }
+
+  #flash_alert{
+    color: red;
+  }
+
+
+
+
+  #form_email{
+  margin-left: 23px;
+}
+
+
+
+#sign_in_from{
+  margin-left: 400px;
+}
+
+/*.new_user{
+  margin-top: 100px;
+}*/
+
+.form {
+  margin: 0 auto;
+  width: 470px;
+  background-color: white;
+  padding-left: 0px;
+}
+
+.form label {
+    display: inline-block;
+    text-align: right;
+    float: left;
+     
+}
+
+.modal_form{
+  margin-top: 0px;
+}
+
+.homepage_dish{
+    height: 100%;
+    width: 50%;
+    position:fixed;
+  }
+  
+  .login{
+    padding-right: 20px;
+    color:#0066ff;
+    font-size: 20.3px;
+    line-height: 1.44359;
+    border: 0px;
+    font-weight:700;
+
+
+  }
+
+  .login a:hover{
+
+  }
+
+  .signup{
+    padding-right: 100px;
+      color:#0066ff;
+    
+    font-size: 20.3px;
+    line-height: 1.44359;
+    border: 0px;
+      font-weight:700;
+
+
+  }
+
+  .top-left {
+  position: absolute;
+  top:450px;
+  left:10px;
+  color: #f79b9b;
+  font-size: 50px;
+  font-weight: 900;
+
+}
+
+ .top-left:hover{
+  color: #f79b9b;
+}
+
+.bottom-right {
+
+}
+.bottom_img{
+  width: 300px;
+  height: 300px;
+}
+.main_header{
+  font-weight: 800;
+  font-size:40px;
+  color: black;
+}
+
+a:hover{
+  text-decoration-line: none;
+  
+}
+
+.u-dimension-2 {
+    box-shadow: 0 0 0 1px rgba(67,41,163,.1), 0 1px 8px 0 rgba(67,41,163,.1);
+}
+</style>
+
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">

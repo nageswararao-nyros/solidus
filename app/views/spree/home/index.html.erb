@@ -1,0 +1,54 @@
+
+<% content_for :sidebar do %>
+  <div data-hook="homepage_sidebar_navigation">
+    <%= render partial: 'spree/shared/taxonomies' %>
+  </div>
+<% end %>
+
+<div data-hook="homepage_products">
+  <% cache(cache_key_for_products) do %>
+    <%= render partial: 'spree/shared/products', locals: { products: @products } %>
+  <% end %>
+
+   <div style="float: right;">
+      <a id="back2Top" title="Back to top" href="#">&#10148;</a> 
+    </div>
+</div>
+
+
+
+<style type="text/css">	
+
+img{
+	width: 53;
+	height: 36;
+}
+
+.product-listing{
+    width: 880px;
+ }
+</style>
+
+
+<script type="text/javascript">
+	$( document ).ready(function() {
+    /*Scroll to top when arrow up clicked BEGIN*/
+  $(window).scroll(function() {
+    var height = $(window).scrollTop();
+      if (height > 500) {
+          $('#back2Top').fadeIn();
+      } else {
+          $('#back2Top').fadeOut();
+      }
+  });
+
+  $("#back2Top").click(function(event) {
+      event.preventDefault();
+      $("html, body").animate({ scrollTop: 0 }, "slow");
+      return false;
+  });    
+});
+
+</script>
+
+

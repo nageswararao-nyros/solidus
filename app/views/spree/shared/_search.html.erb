@@ -1,0 +1,59 @@
+<% @taxons = @taxon && @taxon.parent ? @taxon.parent.children : Spree::Taxon.roots %>
+<%= form_tag spree.products_path, :id => "searchForm", method: :get do %>
+  
+  <%= search_field_tag :keywords, params[:keywords], placeholder: t('spree.search') %>
+  <%= submit_tag t('spree.search'), :id => 'submit_form' %>
+<% end %>     
+   
+
+<head>
+  <meta charset="UTF-8">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.2.27/jquery.autocomplete.min.js"></script>
+  
+  <style>
+  .autocomplete-suggestions { border: 1px solid #999; background: #FFF; overflow: auto; }
+  .autocomplete-suggestion { padding: 2px 5px; white-space: nowrap; overflow: hidden; cursor: pointer; }
+  .autocomplete-selected { background: #F0F0F0; }
+  .autocomplete-suggestions strong { font-weight: normal; color: #3399FF; }
+  .autocomplete-group { padding: 2px 5px; }
+  .autocomplete-group strong { display: block; border-bottom: 1px solid #000; }
+  #submit_form{height: 32px;}
+  </style>
+</head>
+
+
+
+<script type="text/javascript">
+ $(document).ready(function() {
+  var arrayReturn = [];
+	  $.ajax({
+	    url: "http://10.90.90.110:3000/api/v1/products",
+	    async: true,
+	    dataType: 'json',
+	    success: function (data) {
+	      for (var i = 0, len = data.length; i < len; i++) {
+	        var id = (data[i].id).toString();
+	        arrayReturn.push({'value' : data[i].name, 'data' : id});
+	      }	    
+	      loadSuggestions(arrayReturn); 
+	    }
+
+	  });
+	  function loadSuggestions(options) {
+	    $('#keywords').autocomplete({
+	      lookup: options,
+	      onSelect: function (suggestion) {
+	        $('#searchForm').submit();
+
+	      }
+	    });
+	  
+	  }
+	  $('#keywords').val("");
+  });
+
+</script>
+
+

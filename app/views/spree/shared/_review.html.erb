@@ -1,0 +1,60 @@
+<div class="review" itemprop="reviews" itemscope itemtype="http://schema.org/Review" style="margin-bottom: 15px; background-color:#fff; padding: 15px;
+                              border: 1px solid #fbeded; box-shadow: 1px 2px 3px #e2e2e2;">
+   <% if review.approved? || Spree::Reviews::Config[:display_unapproved_reviews] %>
+
+  
+  <span class="reviews-rating" title="<%= txt_stars(review.rating) %>">
+    <%= render "spree/reviews/stars", stars: review.rating %>
+  </span> &nbsp; &nbsp; &nbsp; &nbsp;
+ 
+    <span itemprop="name"> <b style="font-size: 15px;"> <%= review.title %> </b></span>
+    
+    <% if spree_current_user.present? %>
+    <% pre_rated = @product.reviews.find { |review| review.user_id == spree_current_user.id} %>
+    <% end %>
+
+    <span style="float:right"; >
+      <% if pre_rated.present? %>
+        <% if spree_current_user.id == review.user_id %>
+          <%= link_to 'Edit', edit_product_review_path(@product, review.id), :class => 'review_action'  %>
+           <%= link_to 'Delete', product_review_path(@product, review.id),:class => 'review_action' ,method: :delete,  data: {confirm: "Are you sure?"} %>
+        <% end %>
+      <% end %>
+    </span>
+  
+
+     <meta itemprop="datePublished" content="<%= review.created_at.to_date.to_s %>" />
+
+    <meta itemprop="reviewRating" content="<%= review.rating %>" />
+    
+    <% if Spree::Reviews::Config[:show_verified_purchaser] && review.verified_purchaser? %>
+      <div><%= I18n.t("spree.verified_purchaser") %></div>
+    <% end %>
+    <div itemprop="reviewBody">
+      <%= simple_format(review.review, :style => 'padding-top:0px; padding-bottom:0px;') %>
+    </div>
+
+
+    <% review.images.each do |image| %>
+      <div itemprop="image">
+        <%= link_to image_tag(image.url(:product), :width => '100px', :height => '80px') %>
+      </div>
+    <% end %>
+      <% if review.show_identifier %>
+      <% if Spree::Reviews::Config[:show_email] && review.user %>
+        <span itemprop="author"><%= review.user.email %>   </span>
+      <% else %>
+        <span itemprop="author" style="font-weight: 600; color:#878787; font-size: 14px;"><%= review.name %></span>
+      <% end %>
+    <% else %>
+        <span itemprop="author"><%= I18n.t("spree.anonymous") %></span>
+    <% end %> &nbsp; &nbsp; &nbsp;
+     <span class="attribution" style="font-size: 11px;"><%= I18n.t("spree.submitted_on") %> <strong><%= l review.created_at.to_date %></strong></span>
+
+    <% if Spree::Reviews::Config[:feedback_rating] && (!Spree::Reviews::Config[:require_login] || spree_current_user) %> 
+      <div class="feedback_review" id="feedback_review_<%= review.id %>">
+        <%= render "spree/feedback_reviews/form", review: review %>
+      </div>
+    <% end %>
+  <% end %>
+</div>

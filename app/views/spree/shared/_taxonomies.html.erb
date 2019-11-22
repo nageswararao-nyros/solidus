@@ -1,0 +1,39 @@
+<% max_level = Spree::Config[:max_level_in_taxons_menu] || 1 %>
+<nav id="taxonomies" class="sidebar-item" data-hook>
+  <% @taxonomies.each do |taxonomy| %>
+    <% cache [I18n.locale, taxonomy, @taxon, max_level] do %>
+      <h6 class='taxonomy-root'><%= t('spree.shop_by_taxonomy', taxonomy: taxonomy.name) %></h6>
+      <%= taxons_tree(taxonomy.root, @taxon, max_level) %>
+    <% end %>
+  <% end %>
+</nav>
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.2.27/jquery.autocomplete.min.js"></script>
+  <title>js-tutorials.com : jQuery AutoComplete Example Using Ajax </title>
+  <style>
+  .autocomplete-suggestions { border: 1px solid #999; background: #FFF; overflow: auto; }
+  .autocomplete-suggestion { padding: 2px 5px; white-space: nowrap; overflow: hidden; }
+  .autocomplete-selected { background: #F0F0F0; }
+  .autocomplete-suggestions strong { font-weight: normal; color: #3399FF; }
+  .autocomplete-group { padding: 2px 5px; }
+  .autocomplete-group strong { display: block; border-bottom: 1px solid #000; }
+  </style>
+</head>
+
+ 
+  
+  
+
+
+
+
+
+
+
+
+
